@@ -1,0 +1,25 @@
+android {
+    namespace 'mz.co.bilheteira.pixabayimagesearch'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "mz.co.bilheteira.pixabayimagesearch"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
