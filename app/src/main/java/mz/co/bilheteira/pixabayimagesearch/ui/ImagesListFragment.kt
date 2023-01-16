@@ -1,6 +1,8 @@
 package mz.co.bilheteira.pixabayimagesearch.ui
 
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
+import mz.co.bilheteira.pixabayimagesearch.R
 
-class ImagesListFragment : Fragment() {
+
+class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
 }

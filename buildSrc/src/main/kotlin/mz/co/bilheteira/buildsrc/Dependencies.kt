@@ -4,7 +4,6 @@ object Dependencies {
     object AndroidX {
         const val core = "androidx.core:core-ktx:1.9.0"
         const val appcompat = "androidx.appcompat:appcompat:1.5.1"
-        const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
         const val splashScreen = "androidx.core:core-splashscreen:1.0.0"
         const val activity = "androidx.activity:activity-ktx:1.6.0"
@@ -52,10 +51,6 @@ object Dependencies {
         const val codegen = "com.squareup.moshi:moshi-kotlin-codegen:1.14.0"
     }
 
-    object Lottie {
-        const val lottie = "com.airbnb.android:lottie:5.2.0"
-    }
-
     object Picasso {
         const val picasso = "com.squareup.picasso:picasso:2.71828"
     }
@@ -64,25 +59,9 @@ object Dependencies {
         const val circleimageview = "de.hdodenhof:circleimageview:3.1.0"
     }
 
-    object SupportLibrary {
-        const val support = "androidx.legacy:legacy-support-v4:1.0.0"
-    }
-
-    object Commons {
-        const val apache = "org.apache.commons:commons-io:1.3.2"
-    }
-
     object Hilt {
         const val hilt = "com.google.dagger:hilt-android:2.44"
         const val kapt = "com.google.dagger:hilt-android-compiler:2.44"
-    }
-
-    object Timber {
-        const val timber = "com.jakewharton.timber:timber:5.0.1"
-    }
-
-    object Apache {
-        const val commons = "org.apache.commons:commons-io:1.3.2"
     }
 
     object Test {
