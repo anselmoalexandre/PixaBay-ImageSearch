@@ -1,11 +1,13 @@
+import mz.co.bilheteira.buildsrc.BuildVersions
+
 android {
     namespace 'mz.co.bilheteira.pixabayimagesearch'
-    compileSdk 33
+    compileSdk = BuildVersions.compileSDK
 
     defaultConfig {
         applicationId "mz.co.bilheteira.pixabayimagesearch"
-        minSdk 24
-        targetSdk 33
+        minSdk = BuildVersions.minSDK
+        targetSdk = BuildVersions.targetSDK
         versionCode 1
         versionName "1.0"
 
