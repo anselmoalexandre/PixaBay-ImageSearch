@@ -3,26 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/imageListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="mz.co.bilheteira.pixabayimagesearch.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:id="@+id/imageListFragment"
+        android:name="mz.co.bilheteira.pixabayimagesearch.ui.imagesearch.ImagesListFragment"
         tools:layout="@layout/fragment_images_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/imageDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="mz.co.bilheteira.pixabayimagesearch.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:id="@+id/imageDetailsFragment"
+        android:name="mz.co.bilheteira.pixabayimagesearch.ui.imagedetails.ImageDetailsFragment"
         tools:layout="@layout/fragment_image_details">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/imageListFragment" />
     </fragment>
 </navigation>
