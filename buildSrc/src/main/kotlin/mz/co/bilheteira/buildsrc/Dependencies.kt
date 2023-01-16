@@ -64,6 +64,10 @@ object Dependencies {
         const val kapt = "com.google.dagger:hilt-android-compiler:2.44"
     }
 
+    object Timber {
+        const val timber = "com.jakewharton.timber:timber:5.0.1"
+    }
+
     object Test {
         const val junit = "junit:junit:4.13.2"
         const val core = "androidx.test:core:1.4.0"

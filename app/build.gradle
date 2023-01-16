@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation project(path: ':database')
+    implementation project(path: ':utils')
 
     implementation(Dependencies.AndroidX.appcompat)
 

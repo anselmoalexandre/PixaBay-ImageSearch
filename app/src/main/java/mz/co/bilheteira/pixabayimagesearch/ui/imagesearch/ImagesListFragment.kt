@@ -3,6 +3,7 @@ package mz.co.bilheteira.pixabayimagesearch.ui.imagesearch
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import mz.co.bilheteira.pixabayimagesearch.R
@@ -14,6 +15,7 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
     private val binding: FragmentImagesListBinding
         get() = _binding!!
 
+    private val viewModel: ImagesListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
