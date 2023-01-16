@@ -7,6 +7,8 @@ apply from: "$rootProject.projectDir/android_default.gradle"
 
 android {
     defaultConfig {
+        applicationId "mz.co.bilheteira.pixabayimagesearch"
+
         defaultConfig {
             vectorDrawables.useSupportLibrary = true
         }

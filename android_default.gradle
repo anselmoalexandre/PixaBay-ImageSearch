@@ -5,7 +5,6 @@ android {
     compileSdk = BuildVersions.compileSDK
 
     defaultConfig {
-        applicationId "mz.co.bilheteira.pixabayimagesearch"
         minSdk = BuildVersions.minSDK
         targetSdk = BuildVersions.targetSDK
         versionCode 1
