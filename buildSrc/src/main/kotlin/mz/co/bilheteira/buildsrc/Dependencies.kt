@@ -91,9 +91,11 @@ object Dependencies {
         const val truth = "com.google.truth:truth:1.0.1"
         const val hamcrest = "org.hamcrest:hamcrest-all:1.3"
         const val coreTest = "androidx.test.ext:junit:1.1.3"
+        const val mockkandroid = "io.mockk:mockk-android:1.12.3"
+        const val mockkagent = "io.mockk:mockk-agent-jvm:1.12.3"
         const val roboeletric = "org.robolectric:robolectric:4.3.1"
         const val core_testing = "androidx.arch.core:core-testing:2.1.0"
-        const val expresso = "androidx.test.espresso:espresso-core:3.4.0"
+        const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
     }
 }
