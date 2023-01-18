@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import mz.co.bilheteira.pixabayimagesearch.R
 import mz.co.bilheteira.pixabayimagesearch.databinding.FragmentImagesListBinding
@@ -19,7 +18,6 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         _binding = FragmentImagesListBinding.bind(view)
 
         setupObservers()
@@ -28,7 +26,13 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
 
     private fun setupObservers() {}
 
-    private fun setupClickListeners() {}
+    private fun setupClickListeners() {
+        binding.apply {
+            buttonFirst.setOnClickListener {
+                viewModel.fetchImages("fruits")
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

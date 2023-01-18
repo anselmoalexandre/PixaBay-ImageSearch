@@ -10,8 +10,9 @@ apply {
 }
 
 dependencies {
+    api(Dependencies.Timber.timber)
+
     implementation(Dependencies.AndroidX.LiveData.liveData)
-    implementation(Dependencies.Timber.timber)
 
     testImplementation(Dependencies.Test.junit)
 }
