@@ -36,14 +36,23 @@ class ImagesListViewModel @Inject constructor(
     }
 
     init {
-        fetchImages("fruits")
+        fetchHitsFromLocalStorage("fruits")
     }
 
-    fun fetchImages(query: String) {
+    fun fetchHitsFromLocalStorage(query: String){
+        viewModelScope.launch {
+            val cachedHits = repository.getLocalHits()
+            if (cachedHits.isNotEmpty()){
+                _uiState.value = ImageListUIState.Content(hits = cachedHits)
+            } else fetchFromRemoteStorage(query)
+        }
+    }
+
+    private fun fetchFromRemoteStorage(query: String) {
         _uiState.value = ImageListUIState.Loading
         viewModelScope.launch(exceptionHandler) {
             val response = withContext(Dispatchers.IO) {
-                repository.searchImage(query = query)
+                repository.getNetworkHits(query = query)
             }
 
             if (response.isSuccessful) {
@@ -54,12 +63,16 @@ class ImagesListViewModel @Inject constructor(
         }
     }
 
+    fun cacheHitsOnLocalStorage(hits: List<Hits>) = viewModelScope.launch {
+        repository.cacheHits(hits)
+    }
+
     fun showDialog(hits: Hits) {
         val detailsDialogFragment = ImageDetailsDialog.newInstance(
             positiveAction = {
                 _uiState.value = ImageListUIState.Success
                 _interactions.value = ImageListActions.Navigate(
-                    destination = ImagesListFragmentDirections.actionFirstFragmentToSecondFragment()
+                    destination = ImagesListFragmentDirections.toImageDetailsFragment(hitId = hits.id)
                 ).asEvent()
             }
         )

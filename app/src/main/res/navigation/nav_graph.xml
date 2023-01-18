@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_images_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/toImageDetailsFragment"
             app:destination="@id/imageDetailsFragment" />
     </fragment>
     <fragment
@@ -19,8 +19,10 @@
         android:name="mz.co.bilheteira.pixabayimagesearch.ui.imagedetails.ImageDetailsFragment"
         tools:layout="@layout/fragment_image_details">
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/imageListFragment" />
+        <argument
+            android:name="hitId"
+            app:argType="integer"
+            android:defaultValue="0"
+            app:nullable="false" />
     </fragment>
 </navigation>
