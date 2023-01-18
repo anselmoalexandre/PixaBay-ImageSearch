@@ -49,6 +49,7 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
         viewModel.uiState.observe(viewLifecycleOwner) {
             when (it) {
                 ImagesListViewModel.ImageListUIState.Loading -> renderLoading()
+                ImagesListViewModel.ImageListUIState.Success -> dialogFragment.dismiss()
                 is ImagesListViewModel.ImageListUIState.Error -> renderError(it.message)
                 is ImagesListViewModel.ImageListUIState.Content -> renderContent(it.hits)
             }
@@ -56,8 +57,9 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
 
         viewModel.interactions.observeEvent(viewLifecycleOwner) {
             when (it) {
-                is ImagesListViewModel.ImageListActions.DialogNavigate -> showDialog(it.dialog)
+                is ImagesListViewModel.ImageListActions.DialogNavigate -> showDialog(it.dialogFragment)
                 is ImagesListViewModel.ImageListActions.Navigate -> findNavController().navigate(it.destination)
+
             }
         }
     }
@@ -69,7 +71,12 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
     }
 
     private fun handleSelectedHit(hits: Hits) {
+        viewModel.showDialog(hits)
+    }
 
+    private fun showDialog(dialog:DialogFragment){
+        dialogFragment = dialog
+        dialogFragment.show(parentFragmentManager, dialogFragment.tag)
     }
 
     private fun renderLoading() = binding.apply {
@@ -90,11 +97,6 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
             searchFab.isVisible = true
         }
         adapter.submitList(hits)
-    }
-
-    private fun showDialog(dialog: DialogFragment) {
-        dialogFragment = dialog
-        dialogFragment.show(parentFragmentManager, dialogFragment.tag)
     }
 
     private fun showErrorMessage(message: String) {

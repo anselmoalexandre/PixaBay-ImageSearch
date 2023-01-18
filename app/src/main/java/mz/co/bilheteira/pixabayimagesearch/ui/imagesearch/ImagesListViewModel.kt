@@ -13,7 +13,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
 import mz.co.bilheteira.pixabayimagesearch.repository.ImageSearchRepository
+import mz.co.bilheteira.pixabayimagesearch.ui.dialogs.ImageDetailsDialog
 import mz.co.bilheteira.utils.Event
+import mz.co.bilheteira.utils.asEvent
 import mz.co.bilheteira.utils.handleThrowable
 import timber.log.Timber
 import javax.inject.Inject
@@ -52,13 +54,29 @@ class ImagesListViewModel @Inject constructor(
         }
     }
 
+    fun showDialog(hits: Hits) {
+        val detailsDialogFragment = ImageDetailsDialog.newInstance(
+            positiveAction = {
+                _uiState.value = ImageListUIState.Success
+                _interactions.value = ImageListActions.Navigate(
+                    destination = ImagesListFragmentDirections.actionFirstFragmentToSecondFragment()
+                ).asEvent()
+            }
+        )
+
+        _interactions.value = ImageListActions.DialogNavigate(
+            dialogFragment = detailsDialogFragment
+        ).asEvent()
+    }
+
     sealed class ImageListActions {
         data class Navigate(val destination: NavDirections) : ImageListActions()
-        data class DialogNavigate(val dialog: DialogFragment): ImageListActions()
+        data class DialogNavigate(val dialogFragment: DialogFragment) : ImageListActions()
     }
 
     sealed class ImageListUIState {
         object Loading : ImageListUIState()
+        object Success : ImageListUIState()
         data class Error(val message: Any) : ImageListUIState()
         data class Content(val hits: List<Hits>) : ImageListUIState()
     }
