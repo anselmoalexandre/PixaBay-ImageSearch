@@ -79,5 +79,11 @@ dependencies {
     implementation(Dependencies.Hilt.hilt)
     kapt(Dependencies.Hilt.kapt)
 
+    testImplementation(Dependencies.Test.truth)
     testImplementation(Dependencies.Test.junit)
+    testImplementation(Dependencies.Test.espresso)
+    testImplementation(Dependencies.Test.mockkagent)
+    testImplementation(Dependencies.Test.coroutines)
+    testImplementation(Dependencies.Test.mockkandroid)
+    testImplementation(Dependencies.Test.arch)
 }
