@@ -1,5 +1,6 @@
 package mz.co.bilheteira.pixabayimagesearch.ui.imagesearch
 
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -45,7 +46,7 @@ class ImagesListViewModel @Inject constructor(
 
             if (response.isSuccessful) {
                 response.body()?.let {
-                    _uiState.value = ImageListUIState.Content(hits = it)
+                    _uiState.value = ImageListUIState.Content(hits = it.hits)
                 } ?: _uiState.setValue(ImageListUIState.Error(response.message()))
             } else _uiState.value = ImageListUIState.Error(response.message())
         }
@@ -53,6 +54,7 @@ class ImagesListViewModel @Inject constructor(
 
     sealed class ImageListActions {
         data class Navigate(val destination: NavDirections) : ImageListActions()
+        data class DialogNavigate(val dialog: DialogFragment): ImageListActions()
     }
 
     sealed class ImageListUIState {

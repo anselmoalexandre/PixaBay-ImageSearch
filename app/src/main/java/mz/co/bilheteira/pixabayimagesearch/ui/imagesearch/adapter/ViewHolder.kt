@@ -19,8 +19,8 @@ internal class ViewHolder(
     }
 
     fun bind(hits: Hits) = binding.apply {
-        photo.load(hits.previewUrl)
-        name.text = hits.name
+        photo.load(hits.previewURL)
+        name.text = hits.user
         tags.text = hits.tags
     }
 

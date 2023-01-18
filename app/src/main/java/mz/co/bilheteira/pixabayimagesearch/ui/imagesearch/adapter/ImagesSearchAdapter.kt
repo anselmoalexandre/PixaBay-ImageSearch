@@ -24,7 +24,7 @@ internal class ImagesSearchAdapter(
             }
 
             override fun areContentsTheSame(oldItem: Hits, newItem: Hits): Boolean {
-                return oldItem.name == newItem.name
+                return oldItem.user == newItem.user
             }
 
         }
