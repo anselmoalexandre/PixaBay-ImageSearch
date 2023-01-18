@@ -7,6 +7,8 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import mz.co.bilheteira.pixabayimagesearch.R
 import mz.co.bilheteira.pixabayimagesearch.databinding.FragmentImagesListBinding
+import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.ui.imagesearch.adapter.ImagesSearchAdapter
 
 @AndroidEntryPoint
 class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
@@ -16,22 +18,43 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
 
     private val viewModel: ImagesListViewModel by viewModels()
 
+    private val adapter: ImagesSearchAdapter by lazy {
+        ImagesSearchAdapter {
+            handleSelectedHit(it)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentImagesListBinding.bind(view)
 
+        setupAdapter()
         setupObservers()
         setupClickListeners()
     }
 
-    private fun setupObservers() {}
+    private fun setupAdapter(){
+        binding.recycler.adapter = adapter
+    }
+
+    private fun setupObservers() {
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                ImagesListViewModel.ImageListUIState.Loading -> renderLoading()
+                is ImagesListViewModel.ImageListUIState.Error -> renderError(it.message)
+                is ImagesListViewModel.ImageListUIState.Content -> renderContent(it.hits)
+            }
+        }
+    }
 
     private fun setupClickListeners() {
         binding.apply {
-            buttonFirst.setOnClickListener {
-                viewModel.fetchImages("fruits")
-            }
+
         }
+    }
+
+    private fun handleSelectedHit(hits: Hits) {
+
     }
 
     override fun onDestroyView() {
