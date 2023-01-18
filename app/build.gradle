@@ -3,6 +3,8 @@ import mz.co.bilheteira.buildsrc.Dependencies
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 apply from: "$rootProject.projectDir/android_default.gradle"
@@ -31,6 +33,14 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    packagingOptions {
+        exclude("META-INF/*.kotlin_module")
     }
 }
 
@@ -62,6 +72,11 @@ dependencies {
 
     implementation(Dependencies.Kotlin.Coroutines.core)
     implementation(Dependencies.Kotlin.Coroutines.android)
-    
+
+    implementation(Dependencies.Coil.core)
+
+    implementation(Dependencies.Hilt.hilt)
+    kapt(Dependencies.Hilt.kapt)
+
     testImplementation(Dependencies.Test.junit)
 }

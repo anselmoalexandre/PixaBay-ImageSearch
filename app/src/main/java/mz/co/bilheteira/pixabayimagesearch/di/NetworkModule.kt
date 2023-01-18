@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val BASE_URL: String = "https://pixabay.com/api/"
+    private const val BASE_URL: String = "https://pixabay.com/"
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
