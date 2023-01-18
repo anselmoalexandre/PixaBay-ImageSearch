@@ -97,6 +97,8 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
             searchFab.isVisible = true
         }
         adapter.submitList(hits)
+
+        viewModel.cacheHitsOnLocalStorage(hits)
     }
 
     private fun showErrorMessage(message: String) {
