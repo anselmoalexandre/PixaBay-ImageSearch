@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import mz.co.bilheteira.database.HitsDatabase
-import mz.co.bilheteira.database.dao.HitsDao
+import mz.co.bilheteira.database.ImagesDatabase
+import mz.co.bilheteira.database.dao.ImageDao
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,10 +18,10 @@ object DatabaseModule {
         @ApplicationContext context: Context
     ) = Room.databaseBuilder(
         context,
-        HitsDatabase::class.java,
-        HitsDatabase.DB_NAME
+        ImagesDatabase::class.java,
+        ImagesDatabase.DB_NAME
     ).fallbackToDestructiveMigration().build()
 
     @Provides
-    fun provideDao(db: HitsDatabase): HitsDao = db.getHitsDao()
+    fun provideDao(db: ImagesDatabase): ImageDao = db.getImagesDao()
 }

@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 import mz.co.bilheteira.pixabayimagesearch.repository.ImageSearchRepository
 import javax.inject.Inject
 
@@ -19,16 +19,16 @@ class ImageDetailsViewModel @Inject constructor(
     private var _uiState = MutableLiveData<ImagesDetailsUIState>()
     val uiState: LiveData<ImagesDetailsUIState> = _uiState
 
-    fun loadHitDetails(id: Int) {
+    fun loadImageDetails(id: Int) {
         _uiState.value = ImagesDetailsUIState.Loading
         viewModelScope.launch {
-            val response = withContext(Dispatchers.IO) { repository.getHit(id) }
+            val response = withContext(Dispatchers.IO) { repository.getImageDetails(id) }
             _uiState.value = ImagesDetailsUIState.Content(response)
         }
     }
 
     sealed class ImagesDetailsUIState {
         object Loading : ImagesDetailsUIState()
-        data class Content(val hits: Hits) : ImagesDetailsUIState()
+        data class Content(val imagesDetails: ImagesDetails) : ImagesDetailsUIState()
     }
 }

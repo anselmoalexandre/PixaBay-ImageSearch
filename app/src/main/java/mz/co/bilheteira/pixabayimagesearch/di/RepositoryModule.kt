@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
-import mz.co.bilheteira.database.dao.HitsDao
+import mz.co.bilheteira.database.dao.ImageDao
 import mz.co.bilheteira.pixabayimagesearch.domain.remote.ImageSearchService
 import mz.co.bilheteira.pixabayimagesearch.repository.ImageSearchRepository
 import mz.co.bilheteira.pixabayimagesearch.repository.ImageSearchRepositoryImpl
@@ -17,7 +17,7 @@ object RepositoryModule {
     @Provides
     @ViewModelScoped
     fun provideRepository(
-        hitsDao: HitsDao,
+        imageDao: ImageDao,
         imageSearchService: ImageSearchService
-    ): ImageSearchRepository = ImageSearchRepositoryImpl(hitsDao, imageSearchService)
+    ): ImageSearchRepository = ImageSearchRepositoryImpl(imageDao, imageSearchService)
 }

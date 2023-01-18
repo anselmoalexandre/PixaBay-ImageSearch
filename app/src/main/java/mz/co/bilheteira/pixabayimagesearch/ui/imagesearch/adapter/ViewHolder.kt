@@ -5,30 +5,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import mz.co.bilheteira.pixabayimagesearch.databinding.ItemGenericListBinding
-import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 
 internal class ViewHolder(
     private val binding: ItemGenericListBinding,
-    private val currentHits: List<Hits>,
-    private val onHitSelectedCallback: (Hits) -> (Unit)
+    private val imagesDetailsList: List<ImagesDetails>,
+    private val onImageSelectedCallback: (ImagesDetails) -> (Unit)
 ) : RecyclerView.ViewHolder(binding.root) {
     init {
         itemView.setOnClickListener {
-            onHitSelectedCallback.invoke(currentHits[adapterPosition])
+            onImageSelectedCallback.invoke(imagesDetailsList[adapterPosition])
         }
     }
 
-    fun bind(hits: Hits) = binding.apply {
-        photo.load(hits.previewURL)
-        name.text = hits.user
-        tags.text = hits.tags
+    fun bind(imagesDetails: ImagesDetails) = binding.apply {
+        photo.load(imagesDetails.previewURL)
+        name.text = imagesDetails.user
+        tags.text = imagesDetails.tags
     }
 
     companion object {
         fun create(
             parent: ViewGroup,
-            currentHits: List<Hits>,
-            onHitSelectedCallback: (Hits) -> (Unit)
+            imagesDetailsList: List<ImagesDetails>,
+            onImageSelectedCallback: (ImagesDetails) -> (Unit)
         ): ViewHolder {
             val view = ItemGenericListBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -36,7 +36,7 @@ internal class ViewHolder(
                 false
             )
 
-            return ViewHolder(view, currentHits, onHitSelectedCallback)
+            return ViewHolder(view, imagesDetailsList, onImageSelectedCallback)
         }
     }
 }

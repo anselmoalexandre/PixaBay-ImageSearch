@@ -5,10 +5,10 @@ import mz.co.bilheteira.database.entity.ImageEntity
 data class ApiResponse(
     val total: Int,
     val totalHits: Int,
-    val hits: List<Hits>
+    val hits: List<ImagesDetails>
 )
 
-data class Hits(
+data class ImagesDetails(
     val id: Int,
     val user: String,
     val tags: String,
@@ -29,7 +29,7 @@ const val PIXABAY_API_KEY = "32883486-c6e656331d840f3347dbb46f2"
 
 typealias PositiveActionCallbackHandler = () -> Unit
 
-fun ImageEntity.asHit(): Hits = Hits(
+fun ImageEntity.asImageDetails(): ImagesDetails = ImagesDetails(
     id = id,
     user = user,
     tags = tags,

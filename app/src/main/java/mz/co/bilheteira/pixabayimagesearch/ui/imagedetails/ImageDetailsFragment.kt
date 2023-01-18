@@ -11,7 +11,7 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import mz.co.bilheteira.pixabayimagesearch.R
 import mz.co.bilheteira.pixabayimagesearch.databinding.FragmentImageDetailsBinding
-import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 
 @AndroidEntryPoint
 class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
@@ -31,13 +31,13 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
         setupObservers()
     }
 
-    private fun loadHitDetails() = viewModel.loadHitDetails(args.hitId)
+    private fun loadHitDetails() = viewModel.loadImageDetails(args.imageId)
 
     private fun setupObservers() {
         viewModel.uiState.observe(viewLifecycleOwner){
             when(it){
                 ImageDetailsViewModel.ImagesDetailsUIState.Loading -> renderLoading()
-                is ImageDetailsViewModel.ImagesDetailsUIState.Content -> renderContent(it.hits)
+                is ImageDetailsViewModel.ImagesDetailsUIState.Content -> renderContent(it.imagesDetails)
             }
         }
     }
@@ -46,18 +46,18 @@ class ImageDetailsFragment : Fragment(R.layout.fragment_image_details) {
         loading.isVisible = true
     }
 
-    private fun renderContent(hits: Hits){
+    private fun renderContent(imagesDetails: ImagesDetails){
         binding.apply {
             loading.isGone = true
 
-            user.text = hits.user
-            comments.text = "${hits.comments}"
-            downloads.text = "${hits.downloads}"
-            "${hits.likes}".also {
+            user.text = imagesDetails.user
+            comments.text = "${imagesDetails.comments}"
+            downloads.text = "${imagesDetails.downloads}"
+            "${imagesDetails.likes}".also {
                 likes.text = it
             }
-            tags.text = hits.tags
-            photo.load(hits.largeImageURL)
+            tags.text = imagesDetails.tags
+            photo.load(imagesDetails.largeImageURL)
         }
     }
 

@@ -1,15 +1,15 @@
 package mz.co.bilheteira.pixabayimagesearch.repository
 
 import mz.co.bilheteira.pixabayimagesearch.domain.data.ApiResponse
-import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 import retrofit2.Response
 
 interface ImageSearchRepository {
-    suspend fun getHit(id:Int): Hits
+    suspend fun getImageDetails(imageId:Int): ImagesDetails
 
-    suspend fun getLocalHits(): List<Hits>
+    suspend fun getLocalImagesDetails(): List<ImagesDetails>
 
-    suspend fun cacheHits(hits: List<Hits>)
+    suspend fun cacheImagesDetails(imagesDetailsList: List<ImagesDetails>)
 
-    suspend fun getNetworkHits(query:String): Response<ApiResponse>
+    suspend fun getNetworkImageDetails(query:String): Response<ApiResponse>
 }
