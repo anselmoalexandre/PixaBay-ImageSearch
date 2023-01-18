@@ -3,8 +3,8 @@ package mz.co.bilheteira.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "hits")
-data class HitsEntity(
+@Entity(tableName = "image")
+data class ImageEntity(
     @PrimaryKey(autoGenerate = false) val id: Int,
     val user: String,
     val tags: String,

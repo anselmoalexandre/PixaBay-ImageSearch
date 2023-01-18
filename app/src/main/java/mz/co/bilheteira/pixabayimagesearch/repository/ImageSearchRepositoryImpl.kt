@@ -1,7 +1,7 @@
 package mz.co.bilheteira.pixabayimagesearch.repository
 
 import mz.co.bilheteira.database.dao.HitsDao
-import mz.co.bilheteira.database.entity.HitsEntity
+import mz.co.bilheteira.database.entity.ImageEntity
 import mz.co.bilheteira.pixabayimagesearch.domain.data.ApiResponse
 import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
 import mz.co.bilheteira.pixabayimagesearch.domain.data.asHit
@@ -30,7 +30,7 @@ internal class ImageSearchRepositoryImpl(
     }
 
     override suspend fun cacheHits(hits: List<Hits>) = hits.map {
-        HitsEntity(
+        ImageEntity(
             id = it.id,
             user = it.user,
             tags = it.tags,

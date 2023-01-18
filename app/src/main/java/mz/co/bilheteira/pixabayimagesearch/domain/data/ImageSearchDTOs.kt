@@ -1,6 +1,6 @@
 package mz.co.bilheteira.pixabayimagesearch.domain.data
 
-import mz.co.bilheteira.database.entity.HitsEntity
+import mz.co.bilheteira.database.entity.ImageEntity
 
 data class ApiResponse(
     val total: Int,
@@ -29,7 +29,7 @@ const val PIXABAY_API_KEY = "32883486-c6e656331d840f3347dbb46f2"
 
 typealias PositiveActionCallbackHandler = () -> Unit
 
-fun HitsEntity.asHit(): Hits = Hits(
+fun ImageEntity.asHit(): Hits = Hits(
     id = id,
     user = user,
     tags = tags,

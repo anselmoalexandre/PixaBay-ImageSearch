@@ -3,9 +3,9 @@ package mz.co.bilheteira.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import mz.co.bilheteira.database.dao.HitsDao
-import mz.co.bilheteira.database.entity.HitsEntity
+import mz.co.bilheteira.database.entity.ImageEntity
 
-@Database(entities = [HitsEntity::class], exportSchema = false, version = 1)
+@Database(entities = [ImageEntity::class], exportSchema = false, version = 1)
 abstract class HitsDatabase : RoomDatabase() {
     abstract fun getHitsDao(): HitsDao
 
