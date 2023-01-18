@@ -39,10 +39,10 @@ class ImagesListViewModel @Inject constructor(
         fetchHitsFromLocalStorage("fruits")
     }
 
-    fun fetchHitsFromLocalStorage(query: String){
+    fun fetchHitsFromLocalStorage(query: String) {
         viewModelScope.launch {
             val cachedHits = repository.getLocalHits()
-            if (cachedHits.isNotEmpty()){
+            if (cachedHits.isNotEmpty()) {
                 _uiState.value = ImageListUIState.Content(hits = cachedHits)
             } else fetchFromRemoteStorage(query)
         }
@@ -64,7 +64,7 @@ class ImagesListViewModel @Inject constructor(
     }
 
     fun cacheHitsOnLocalStorage(hits: List<Hits>) = viewModelScope.launch {
-        repository.cacheHits(hits)
+        withContext(Dispatchers.IO) { repository.cacheHits(hits) }
     }
 
     fun showDialog(hits: Hits) {

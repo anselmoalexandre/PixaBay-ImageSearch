@@ -6,6 +6,7 @@
     app:startDestination="@id/imageListFragment">
 
     <fragment
+        android:label="List Images"
         android:id="@+id/imageListFragment"
         android:name="mz.co.bilheteira.pixabayimagesearch.ui.imagesearch.ImagesListFragment"
         tools:layout="@layout/fragment_images_list">
@@ -15,6 +16,7 @@
             app:destination="@id/imageDetailsFragment" />
     </fragment>
     <fragment
+        android:label="Image details"
         android:id="@+id/imageDetailsFragment"
         android:name="mz.co.bilheteira.pixabayimagesearch.ui.imagedetails.ImageDetailsFragment"
         tools:layout="@layout/fragment_image_details">
