@@ -7,4 +7,10 @@
     <string name="likes">Likes:</string>
     <string name="comments">Comments:</string>
     <string name="tags">Tags:</string>
+    <string name="search">Search</string>
+    <string name="fruits">Fruits</string>
+    <string name="what_are_going_to_search_about">What are going to search about?</string>
+    <string name="yes">YES</string>
+    <string name="cancel">Cancel</string>
+    <string name="want_to_check_more_details">Want to check more details?</string>
 </resources>

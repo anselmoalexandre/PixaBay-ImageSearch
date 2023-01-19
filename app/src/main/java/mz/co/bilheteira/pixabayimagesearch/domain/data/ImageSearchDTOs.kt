@@ -27,8 +27,6 @@ enum class ImageType(val type: String) {
 
 const val PIXABAY_API_KEY = "32883486-c6e656331d840f3347dbb46f2"
 
-typealias PositiveActionCallbackHandler = () -> Unit
-
 fun ImageEntity.asImageDetails(): ImagesDetails = ImagesDetails(
     id = id,
     user = user,
@@ -39,3 +37,7 @@ fun ImageEntity.asImageDetails(): ImagesDetails = ImagesDetails(
     previewURL = previewURL,
     largeImageURL = largeImageURL
 )
+
+typealias PositiveActionCallbackHandler = () -> Unit
+
+typealias SearchInputCallbackHandler = (String) -> Unit

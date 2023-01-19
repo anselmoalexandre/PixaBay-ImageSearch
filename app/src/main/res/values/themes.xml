@@ -8,5 +8,6 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.TextAppearance.TitleLarge" parent="TextAppearance.Material3.TitleLarge" />
     <style name="Theme.TextAppearance.TitleMedium" parent="TextAppearance.Material3.TitleMedium" />
 </resources>

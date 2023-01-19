@@ -66,7 +66,7 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
 
     private fun setupClickListeners() {
         binding.searchFab.setOnClickListener {
-
+            viewModel.requestUserInput()
         }
     }
 
