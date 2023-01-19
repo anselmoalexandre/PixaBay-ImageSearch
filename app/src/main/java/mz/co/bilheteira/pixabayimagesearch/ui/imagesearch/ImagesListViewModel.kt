@@ -14,6 +14,7 @@ import kotlinx.coroutines.withContext
 import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 import mz.co.bilheteira.pixabayimagesearch.repository.ImageSearchRepository
 import mz.co.bilheteira.pixabayimagesearch.ui.dialogs.ImageDetailsDialog
+import mz.co.bilheteira.pixabayimagesearch.ui.dialogs.SearchInputDialog
 import mz.co.bilheteira.utils.Event
 import mz.co.bilheteira.utils.asEvent
 import mz.co.bilheteira.utils.handleThrowable
@@ -49,7 +50,7 @@ class ImagesListViewModel @Inject constructor(
         }
     }
 
-     fun fetchFromRemoteStorage(query: String) {
+    fun fetchFromRemoteStorage(query: String) {
         _uiState.value = ImageListUIState.Loading
         viewModelScope.launch(exceptionHandler) {
             val response = withContext(Dispatchers.IO) {
@@ -80,6 +81,16 @@ class ImagesListViewModel @Inject constructor(
 
         _interactions.value = ImageListActions.DialogNavigate(
             dialogFragment = detailsDialogFragment
+        ).asEvent()
+    }
+
+    fun requestUserInput() {
+        val userSearchInputDialog = SearchInputDialog.newInstance {
+            fetchFromRemoteStorage(query = it)
+        }
+
+        _interactions.value = ImageListActions.DialogNavigate(
+            dialogFragment = userSearchInputDialog
         ).asEvent()
     }
 
