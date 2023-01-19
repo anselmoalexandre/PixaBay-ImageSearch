@@ -17,7 +17,7 @@ import org.junit.rules.TestRule
 
 @ExperimentalCoroutinesApi
 internal class ImagesListViewModelTest {
-    @MockK(relaxUnitFun = true)
+    @MockK(relaxed = true)
     private lateinit var mockkRepository: ImageSearchRepository
 
     private lateinit var viewModel:ImagesListViewModel
