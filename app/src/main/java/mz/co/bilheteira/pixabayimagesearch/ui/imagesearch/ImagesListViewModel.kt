@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 import mz.co.bilheteira.pixabayimagesearch.repository.ImageSearchRepository
 import mz.co.bilheteira.pixabayimagesearch.ui.dialogs.ImageDetailsDialog
 import mz.co.bilheteira.utils.Event
@@ -36,43 +36,44 @@ class ImagesListViewModel @Inject constructor(
     }
 
     init {
-        fetchHitsFromLocalStorage("fruits")
+        fetchImageDetailsFromLocalStorage("fruits")
     }
 
-    fun fetchHitsFromLocalStorage(query: String){
+    fun fetchImageDetailsFromLocalStorage(query: String) {
+        _uiState.value = ImageListUIState.Loading
         viewModelScope.launch {
-            val cachedHits = repository.getLocalHits()
-            if (cachedHits.isNotEmpty()){
-                _uiState.value = ImageListUIState.Content(hits = cachedHits)
+            val cachedHits = repository.getLocalImagesDetails()
+            if (cachedHits.isNotEmpty()) {
+                _uiState.value = ImageListUIState.Content(imagesDetailsList = cachedHits)
             } else fetchFromRemoteStorage(query)
         }
     }
 
-    private fun fetchFromRemoteStorage(query: String) {
+     fun fetchFromRemoteStorage(query: String) {
         _uiState.value = ImageListUIState.Loading
         viewModelScope.launch(exceptionHandler) {
             val response = withContext(Dispatchers.IO) {
-                repository.getNetworkHits(query = query)
+                repository.getNetworkImageDetails(query = query)
             }
 
             if (response.isSuccessful) {
                 response.body()?.let {
-                    _uiState.value = ImageListUIState.Content(hits = it.hits)
+                    _uiState.value = ImageListUIState.Content(imagesDetailsList = it.hits)
                 } ?: _uiState.setValue(ImageListUIState.Error(response.message()))
             } else _uiState.value = ImageListUIState.Error(response.message())
         }
     }
 
-    fun cacheHitsOnLocalStorage(hits: List<Hits>) = viewModelScope.launch {
-        repository.cacheHits(hits)
+    fun cacheHitsOnLocalStorage(imagesDetailsList: List<ImagesDetails>) = viewModelScope.launch {
+        withContext(Dispatchers.IO) { repository.cacheImagesDetails(imagesDetailsList) }
     }
 
-    fun showDialog(hits: Hits) {
+    fun showDialog(imagesDetails: ImagesDetails) {
         val detailsDialogFragment = ImageDetailsDialog.newInstance(
             positiveAction = {
                 _uiState.value = ImageListUIState.Success
                 _interactions.value = ImageListActions.Navigate(
-                    destination = ImagesListFragmentDirections.toImageDetailsFragment(hitId = hits.id)
+                    destination = ImagesListFragmentDirections.toImageDetailsFragment(imageId = imagesDetails.id)
                 ).asEvent()
             }
         )
@@ -91,6 +92,6 @@ class ImagesListViewModel @Inject constructor(
         object Loading : ImageListUIState()
         object Success : ImageListUIState()
         data class Error(val message: Any) : ImageListUIState()
-        data class Content(val hits: List<Hits>) : ImageListUIState()
+        data class Content(val imagesDetailsList: List<ImagesDetails>) : ImageListUIState()
     }
 }

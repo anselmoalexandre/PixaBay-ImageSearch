@@ -7,4 +7,6 @@
         <item name="colorAccent">@color/teal_200</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.TextAppearance.TitleMedium" parent="TextAppearance.Material3.TitleMedium" />
 </resources>

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import mz.co.bilheteira.pixabayimagesearch.R
 import mz.co.bilheteira.pixabayimagesearch.databinding.FragmentImagesListBinding
-import mz.co.bilheteira.pixabayimagesearch.domain.data.Hits
+import mz.co.bilheteira.pixabayimagesearch.domain.data.ImagesDetails
 import mz.co.bilheteira.pixabayimagesearch.ui.imagesearch.adapter.ImagesSearchAdapter
 import mz.co.bilheteira.utils.observeEvent
 
@@ -51,7 +51,7 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
                 ImagesListViewModel.ImageListUIState.Loading -> renderLoading()
                 ImagesListViewModel.ImageListUIState.Success -> dialogFragment.dismiss()
                 is ImagesListViewModel.ImageListUIState.Error -> renderError(it.message)
-                is ImagesListViewModel.ImageListUIState.Content -> renderContent(it.hits)
+                is ImagesListViewModel.ImageListUIState.Content -> renderContent(it.imagesDetailsList)
             }
         }
 
@@ -65,13 +65,13 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
     }
 
     private fun setupClickListeners() {
-        binding.apply {
+        binding.searchFab.setOnClickListener {
 
         }
     }
 
-    private fun handleSelectedHit(hits: Hits) {
-        viewModel.showDialog(hits)
+    private fun handleSelectedHit(imagesDetails: ImagesDetails) {
+        viewModel.showDialog(imagesDetails)
     }
 
     private fun showDialog(dialog:DialogFragment){
@@ -91,14 +91,14 @@ class ImagesListFragment : Fragment(R.layout.fragment_images_list) {
         showErrorMessage(message = getString(errorId))
     }
 
-    private fun renderContent(hits: List<Hits>){
+    private fun renderContent(imagesDetailsList: List<ImagesDetails>){
         binding.apply {
             loading.isGone = true
             searchFab.isVisible = true
         }
-        adapter.submitList(hits)
+        adapter.submitList(imagesDetailsList)
 
-        viewModel.cacheHitsOnLocalStorage(hits)
+        viewModel.cacheHitsOnLocalStorage(imagesDetailsList)
     }
 
     private fun showErrorMessage(message: String) {

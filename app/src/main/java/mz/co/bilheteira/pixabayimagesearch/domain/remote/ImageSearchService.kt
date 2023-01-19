@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface ImageSearchService {
     @GET("api/")
-    suspend fun getNetworkHits(
+    suspend fun getNetworkImagesDetails(
         @Query("key") key: String = PIXABAY_API_KEY,
         @Query("q") query: String,
         @Query("image_type") image_type: String = ImageType.PHOTO.type
